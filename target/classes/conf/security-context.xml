@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       					http://www.springframework.org/schema/beans/spring-beans.xsd
+       					http://www.springframework.org/schema/security
+       					http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<security:http realm="Demo Server REALM" auto-config="true">
+		<security:csrf disabled="true" />
+
+
+		<security:intercept-url pattern="/api/admin/**"
+			access="hasRole('ROLE_ADMIN')" />
+
+		<security:intercept-url pattern="/api/user/**"
+								access="hasRole('ROLE_USER')" />
+
+		<security:http-basic />
+
+	</security:http>
+
+	<security:authentication-manager alias="authenticationManager">
+		<security:authentication-provider
+			user-service-ref="userDetailsService">
+			<security:password-encoder ref="bCryptPasswordEncoder" />
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+
+
+	<bean id="userDetailsService" class="me.senel.demo.security.UserDetailServiceImpl" />
+
+	<bean id="bCryptPasswordEncoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+</beans>

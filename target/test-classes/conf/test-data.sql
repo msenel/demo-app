@@ -1,0 +1,1 @@
+insert into user (user_id, first_name, last_name, email, accessToken, role) values ('8dc53df5-703e-49b3-8670-b1c468f47f1f', 'Mustafa', 'Şenel', 'senelmu@gmail.com', '$2a$10$sCDqwolQRUGQh4QLsY4EH.Ccx8Li9YfagfQ6y7clQEI0JX85Up1NO', 2);
